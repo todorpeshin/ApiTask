@@ -8,11 +8,11 @@ import requests
 class Rpa_api:
     def __init__(self, **options):
 
-        self._rpa_fqdn = "vmc-07-07-46-06.kryonaws.com"
+        self._rpa_fqdn = "vmc.test.com"
         self._access_token = ""
         self._rpa_url = ""
-        self._user = "dev"
-        self._password = "OneRedRosse!_?"
+        self._user = "user1"
+        self._password = "pass1"
 
 
 
@@ -36,13 +36,13 @@ class Rpa_api:
 
     def acces_token(self, fqdn):
         body = {'grant_type': 'password',
-                'client_id': 'kryon-console',
-                'username': 'dev',
-                'password': 'OneRedRosse!_?'}
+                'client_id': 'test-console',
+                'username': 'user1',
+                'password': 'pass1'}
 
         headers = {'Content-Type': 'application/x-www-form-urlencoded'}
 
-        response = requests.post(('http://{}/auth/realms/kryon/protocol/openid-connect/token'.format(fqdn)),
+        response = requests.post(('http://{}/auth/realms/test/protocol/openid-connect/token'.format(fqdn)),
                                  data=body, headers=headers)
 
         token = response.json().get('access_token')
@@ -78,8 +78,8 @@ class Rpa_api:
         """
 
         headers = {
-            'kryon-auth-provider': 'aerobase',
-            'kryon-client-id': 'kryon-public-api',
+            'test-auth-provider': 'aerobase',
+            'test-client-id': 'test-public-api',
             'Authorization': ('Bearer {}'.format(token))
         }
 
